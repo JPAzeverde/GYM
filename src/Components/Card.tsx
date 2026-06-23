@@ -22,12 +22,7 @@ export function Card({ size = "normal", style, children, ...rest }: CardProps) {
       bg="surface"
       p={currentConfig.p}
       radius={currentConfig.radius}
-      style={[
-        Theme.shadows.soft,
-        currentConfig.minHeight ? { minHeight: currentConfig.minHeight } : {},
-        style,
-        { padding: Theme.spacing.md },
-      ]}
+      style={[Theme.shadows.soft, style, { padding: Theme.spacing.md }]}
       {...rest}
     >
       {children}

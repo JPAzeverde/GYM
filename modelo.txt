@@ -1,59 +1,220 @@
-
-Atue como um Engenheiro de Software Sênior especialista em React Native e TypeScript. Acabei de criar um projeto vazio em React Native e preciso estabelecer a arquitetura base, o sistema de design (Theme) e o primeiro componente universal.
-
-Diretrizes Gerais do Projeto:
-
-Todo o código fonte deve ficar dentro da pasta src/.
-
-Quero utilizar Absolute Imports com o alias @/ apontando direto para src/.
-
-Utilize StyleSheet nativo para estilização em todo o projeto.
-
-O código deve ser fortemente tipado com TypeScript.
-
-Por favor, divida sua resposta em 3 Etapas lógicas. Entregue o código completo de cada etapa.
-
-Etapa 1: Configuração Base e Telas Iniciais
+Quero que crie o Componente Avatar.tsx e o Header.tsx
 
 
 
-Mostre o que preciso alterar no tsconfig.json e no babel.config.js (ou app.json se for Expo) para que o import com @/ funcione.
+GYM/src/Components/Text.tsx:
 
-Crie a estrutura de pastas mínima e essencial.
+import { Theme } from "@/Theme";
+import React from "react";
+import {
+  Text as RNText,
+  TextProps as RNTextProps,
+  StyleSheet,
+  TextStyle,
+} from "react-native";
 
-Crie a página Home (simples, com um texto sinalizando que é a Home e um botão simples).
+// Removemos o 'ul' da tipagem
+type TextVariant = "h1" | "h2" | "h3" | "h4" | "p1" | "p2" | "p3" | "a" | "li";
 
-Crie a página Amostra (uma página em branco por enquanto, que receberá os elementos futuros). Forneça uma lógica de navegação simples entre as duas para testarmos.
+export interface TextProps extends RNTextProps {
+  color?: keyof typeof Theme.colors;
+  align?: TextStyle["textAlign"];
+  children: React.ReactNode;
+}
 
-Etapa 2: Sistema de Design (src/Theme)
+const BaseText = ({
+  variant,
+  color = "textPrimary",
+  align = "left",
+  style,
+  children,
+  ...rest
+}: TextProps & { variant: TextVariant }) => {
+  const customStyles: TextStyle[] = [
+    styles[variant],
+    { color: Theme.colors[color], textAlign: align },
+    style as TextStyle,
+  ];
 
-Crie os seguintes arquivos para centralizar o visual do app. Eles devem focar em um tema dark monocromático e moderno:
+  const content = variant === "li" ? `\u2022  ${children}` : children;
+
+  return (
+    <RNText style={customStyles} {...rest}>
+      {content}
+    </RNText>
+  );
+};
+
+export const H1 = (props: TextProps) => <BaseText variant="h1" {...props} />;
+export const H2 = (props: TextProps) => <BaseText variant="h2" {...props} />;
+export const H3 = (props: TextProps) => <BaseText variant="h3" {...props} />;
+export const H4 = (props: TextProps) => <BaseText variant="h4" {...props} />;
+export const P1 = (props: TextProps) => <BaseText variant="p1" {...props} />;
+export const P2 = (props: TextProps) => <BaseText variant="p2" {...props} />;
+export const P3 = (props: TextProps) => <BaseText variant="p3" {...props} />;
+export const A = (props: TextProps) => <BaseText variant="a" {...props} />;
+export const LI = (props: TextProps) => <BaseText variant="li" {...props} />;
+
+const styles = StyleSheet.create({
+  h1: {
+    fontFamily: Theme.typography.fonts.title,
+    fontSize: Theme.typography.sizes.xxxl,
+    lineHeight: Theme.typography.sizes.xxxl * 1.1,
+  },
+  h2: {
+    fontFamily: Theme.typography.fonts.title,
+    fontSize: Theme.typography.sizes.xxl,
+    lineHeight: Theme.typography.sizes.xxl * 1.2,
+  },
+  h3: {
+    fontFamily: Theme.typography.fonts.title,
+    fontSize: Theme.typography.sizes.xl,
+    lineHeight: Theme.typography.sizes.xl * 1.2,
+  },
+  h4: {
+    fontFamily: Theme.typography.fonts.title,
+    fontSize: Theme.typography.sizes.lg,
+    lineHeight: Theme.typography.sizes.lg * 1.2,
+  },
+  p1: {
+    fontFamily: Theme.typography.fonts.body,
+    fontSize: Theme.typography.sizes.lg,
+    lineHeight: Theme.typography.sizes.lg * 1.5,
+  },
+  p2: {
+    fontFamily: Theme.typography.fonts.body,
+    fontSize: Theme.typography.sizes.md,
+    lineHeight: Theme.typography.sizes.md * 1.5,
+  },
+  p3: {
+    fontFamily: Theme.typography.fonts.body,
+    fontSize: Theme.typography.sizes.sm,
+    lineHeight: Theme.typography.sizes.sm * 1.5,
+  },
+  a: {
+    fontFamily: Theme.typography.fonts.body,
+    fontSize: Theme.typography.sizes.md,
+    textDecorationLine: "underline",
+    color: Theme.colors.primary,
+  },
+  li: {
+    fontFamily: Theme.typography.fonts.body,
+    fontSize: Theme.typography.sizes.md,
+    lineHeight: Theme.typography.sizes.md * 1.5,
+    marginBottom: Theme.spacing.xs,
+    marginLeft: Theme.spacing.sm,
+  },
+});
+
+
+colors.ts
+export const colors = {
+  // Fundo e Superfícies
+  background: "#121212",
+  surface: "#1E1E1E",
+  surfaceHighlight: "#2C2C2C",
+
+  // Textos
+  textPrimary: "#FFFFFF",
+  textSecondary: "#A0A0A0",
+  textDisabled: "#666666",
+
+  // Brand (Monocromático, usando branco/cinza claro como primário)
+  primary: "#FFFFFF",
+  border: "#333333",
+
+  // Semânticas (Feedback)
+  error: "#CF6679", // Vermelho suave padrão para dark mode
+  success: "#03DAC6", // Verde/Ciano padrão para dark mode
+};
 
 
 
-colors.ts: Cores principais, secundárias, cor de fundo (dark), cor de texto (clara para contrastar), além de cores de erro e sucesso.
-
-typography.ts: Família de fontes (Configure a 'Bebas Neue' para ser usada nos títulos), tamanhos em uma escala fluida e pesos.
-
-spacing.ts: Espaçamentos padronizados (ex: xs, sm, md, lg).
-
-radius.ts: Padrões de bordas arredondadas.
-
-shadows.ts: Sombras (forneça compatibilidade para iOS e Android em temas escuros).
-
-index.ts: Exporte todo o tema em um único objeto para facilitar a importação.
-
-Etapa 3: O Componente Base (src/Components/Text.tsx)
-
-Crie o primeiro componente universal da aplicação: um Componente de Texto base.
 
 
 
-Ele deve consumir automaticamente as cores e tipografias do nosso diretório Theme.
+radius.ts
+export const radius = {
+  none: 0,
+  sm: 8,
+  md: 8,
+  lg: 8,
+  pill: 9999, // Para botões totalmente arredondados
+};
 
-Utilize TypeScript para criar "variants" baseadas em tags HTML. O componente deve aceitar propriedades (props) para renderizar os estilos equivalentes a: h1, h2, h3, h4, p1, p2, p3, a (link), ul e li.
-
-Garanta que a fonte 'Bebas Neue' seja aplicada automaticamente sempre que uma variant de título (h1 a h4) for chamada.
 
 
-Quero que me envie um código, me dia onde deve ficar e aguarde minha mensagem para continuar e assim por diante, um codigo/arquivo/etapa de cada vez
+shadows.ts
+export const shadows = {
+  soft: {
+    // iOS
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    // Android
+    elevation: 4,
+  },
+  medium: {
+    // iOS
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.7,
+    shadowRadius: 8,
+    // Android
+    elevation: 8,
+  },
+};
+
+
+
+spacing.ts
+export const spacing = {
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 48,
+};
+
+
+
+typography.ts
+export const typography = {
+  fonts: {
+    title: "BebasNeue-Regular", // Certifique-se de carregar a fonte com este nome no App.tsx
+    body: "System", // Fonte padrão do sistema (San Francisco no iOS, Roboto no Android) para melhor legibilidade em textos longos
+  },
+  sizes: {
+    xs: 12,
+    sm: 14,
+    md: 16, // Base (p2)
+    lg: 20, // (p1)
+    xl: 24, // (h4)
+    xxl: 32, // (h3/h2)
+    xxxl: 48, // (h1)
+  },
+  weights: {
+    regular: "400" as const,
+    medium: "500" as const,
+    bold: "700" as const,
+  },
+};
+
+
+
+index.ts
+import { colors } from "./colors";
+import { radius } from "./radius";
+import { shadows } from "./shadows";
+import { spacing } from "./spacing";
+import { typography } from "./typography";
+
+export const Theme = {
+  colors,
+  typography,
+  spacing,
+  radius,
+  shadows,
+};

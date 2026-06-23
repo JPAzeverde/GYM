@@ -7,9 +7,9 @@ interface HomeProps {
 export function Home({ onNavigate }: HomeProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Página Home</Text>
+      <Text style={styles.title}>Home</Text>
       <TouchableOpacity style={styles.button} onPress={onNavigate}>
-        <Text style={styles.buttonText}>Ir para Amostra</Text>
+        <Text style={styles.buttonText}>Amostra</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,10 +1,10 @@
 import { Theme } from "@/Theme";
 import React from "react";
 import {
-    Text as RNText,
-    TextProps as RNTextProps,
-    StyleSheet,
-    TextStyle,
+  Text as RNText,
+  TextProps as RNTextProps,
+  StyleSheet,
+  TextStyle,
 } from "react-native";
 
 // Removemos o 'ul' da tipagem
@@ -96,5 +96,6 @@ const styles = StyleSheet.create({
     fontSize: Theme.typography.sizes.md,
     lineHeight: Theme.typography.sizes.md * 1.5,
     marginBottom: Theme.spacing.xs,
+    marginLeft: Theme.spacing.sm,
   },
 });
