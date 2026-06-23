@@ -1,0 +1,59 @@
+
+Atue como um Engenheiro de Software Sênior especialista em React Native e TypeScript. Acabei de criar um projeto vazio em React Native e preciso estabelecer a arquitetura base, o sistema de design (Theme) e o primeiro componente universal.
+
+Diretrizes Gerais do Projeto:
+
+Todo o código fonte deve ficar dentro da pasta src/.
+
+Quero utilizar Absolute Imports com o alias @/ apontando direto para src/.
+
+Utilize StyleSheet nativo para estilização em todo o projeto.
+
+O código deve ser fortemente tipado com TypeScript.
+
+Por favor, divida sua resposta em 3 Etapas lógicas. Entregue o código completo de cada etapa.
+
+Etapa 1: Configuração Base e Telas Iniciais
+
+
+
+Mostre o que preciso alterar no tsconfig.json e no babel.config.js (ou app.json se for Expo) para que o import com @/ funcione.
+
+Crie a estrutura de pastas mínima e essencial.
+
+Crie a página Home (simples, com um texto sinalizando que é a Home e um botão simples).
+
+Crie a página Amostra (uma página em branco por enquanto, que receberá os elementos futuros). Forneça uma lógica de navegação simples entre as duas para testarmos.
+
+Etapa 2: Sistema de Design (src/Theme)
+
+Crie os seguintes arquivos para centralizar o visual do app. Eles devem focar em um tema dark monocromático e moderno:
+
+
+
+colors.ts: Cores principais, secundárias, cor de fundo (dark), cor de texto (clara para contrastar), além de cores de erro e sucesso.
+
+typography.ts: Família de fontes (Configure a 'Bebas Neue' para ser usada nos títulos), tamanhos em uma escala fluida e pesos.
+
+spacing.ts: Espaçamentos padronizados (ex: xs, sm, md, lg).
+
+radius.ts: Padrões de bordas arredondadas.
+
+shadows.ts: Sombras (forneça compatibilidade para iOS e Android em temas escuros).
+
+index.ts: Exporte todo o tema em um único objeto para facilitar a importação.
+
+Etapa 3: O Componente Base (src/Components/Text.tsx)
+
+Crie o primeiro componente universal da aplicação: um Componente de Texto base.
+
+
+
+Ele deve consumir automaticamente as cores e tipografias do nosso diretório Theme.
+
+Utilize TypeScript para criar "variants" baseadas em tags HTML. O componente deve aceitar propriedades (props) para renderizar os estilos equivalentes a: h1, h2, h3, h4, p1, p2, p3, a (link), ul e li.
+
+Garanta que a fonte 'Bebas Neue' seja aplicada automaticamente sempre que uma variant de título (h1 a h4) for chamada.
+
+
+Quero que me envie um código, me dia onde deve ficar e aguarde minha mensagem para continuar e assim por diante, um codigo/arquivo/etapa de cada vez
