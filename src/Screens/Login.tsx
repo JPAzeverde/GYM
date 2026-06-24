@@ -19,7 +19,7 @@ export function Login({ onNavigateToRegistro, onLoginSuccess }: LoginProps) {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Box flex={1} bg="background" justify="center" px="lg">
+        <Box flex={1} bg="background" justify="center" align="center" px="lg">
           {/* Cabeçalho */}
           <Box mb="xl" align="center">
             <H1>BEM-VINDO</H1>
@@ -27,7 +27,7 @@ export function Login({ onNavigateToRegistro, onLoginSuccess }: LoginProps) {
           </Box>
 
           {/* Formulário */}
-          <Card size="normal">
+          <Card size="big" style={{ maxWidth: 600, width: "100%" }}>
             <Input
               label=""
               placeholder="E-mail"

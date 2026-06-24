@@ -2,7 +2,7 @@ import { Box } from "@/Components/Box";
 import { Button } from "@/Components/Buttons";
 import { Card } from "@/Components/Card";
 import { Input } from "@/Components/Input";
-import { H2, P2 } from "@/Components/Text";
+import { P2 } from "@/Components/Text";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 
 interface RegistroProps {
@@ -19,12 +19,12 @@ export function Registro({ onNavigateToLogin }: RegistroProps) {
         <Box flex={1} bg="background" justify="center" px="lg" py="xl">
           {/* Cabeçalho */}
           <Box mb="xl" align="center">
-            <H2>CRIAR CONTA</H2>
+            <H1>CRIAR CONTA</H1>
             <P2 color="textSecondary">Preencha os dados abaixo</P2>
           </Box>
 
           {/* Formulário */}
-          <Card size="big">
+          <Card size="big" tyle={{ maxWidth: 600, width: "100%" }}>
             <Input placeholder="Nome completo" autoCapitalize="words" />
             <Input
               placeholder="E-mail"
